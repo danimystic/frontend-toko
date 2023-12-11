@@ -1,0 +1,41 @@
+/* Carousel.module.css */
+.carousel {
+    width: 80%;
+    margin: auto;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide {
+    position: relative;
+    height: 100%;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.image {
+    width: auto;
+    height: 100vh;
+}
+  
+.caption {
+    position: absolute; 
+    bottom: 10%; 
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    text-align: center;
+    font-size: 1.2em; 
+}
+  
+.addToCart {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+}
+  

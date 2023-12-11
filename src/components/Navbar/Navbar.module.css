@@ -1,0 +1,79 @@
+.header {
+  background-color: #111111;
+  height: 93px;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 99;
+  box-sizing: border-box;
+  padding-left: 54px;
+  padding-right: 54px;
+}
+
+.text-wrapper-12 {
+  color: #ffffff;
+  font-family: "Helvetica Neue Medium Extended-Regular", Helvetica;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 24px;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+  width: fit-content;
+  text-decoration: none;
+}
+
+.tengah {
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-wrapper-10 {
+  color: #ffffff;
+  font-family: "Helvetica Neue Medium Extended-Regular", Helvetica;
+  font-size: 15px;
+  font-weight: 400;
+  height: 17px;
+  letter-spacing: 0;
+  line-height: 24px;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+  width: 76px;
+  text-decoration: none;
+}
+
+.text-wrapper-11 {
+  color: #ffffff;
+  font-family: "Helvetica Neue Medium Extended-Regular", Helvetica;
+  font-size: 15px;
+  font-weight: 400;
+  height: 17px;
+  letter-spacing: 0;
+  line-height: 24px;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+  width: 99px;
+  text-decoration: none;
+}
+
+.kanan {
+  right: 0%;
+  top: 0;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.profile-icon:hover{
+  cursor: pointer;
+}

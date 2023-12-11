@@ -1,0 +1,23 @@
+.outerDetailProducts{
+    box-sizing: border-box;
+    padding: 150px;
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+    padding-bottom: 50px;
+}
+
+.productImage{
+    width: 500px;
+    min-width: 300px;
+    flex: 1;
+}
+
+.right{
+    width: 500px;
+    flex: 1;
+}
+
+.productDescription{
+    margin-bottom: 50px;
+}

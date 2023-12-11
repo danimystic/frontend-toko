@@ -1,0 +1,12 @@
+.addProductsForm{
+    padding: 200px;
+    box-sizing: border-box;
+    color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.formList{
+    color: #f9f9f9;
+}

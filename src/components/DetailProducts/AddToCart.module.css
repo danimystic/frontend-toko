@@ -1,0 +1,50 @@
+.sizes{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px 0px;
+}
+
+.sizes button{
+    width: 70px;
+    background-color: transparent;
+    border: 1px solid #fff;
+}
+
+.sizes button:hover{
+    background-color: #fff;
+    color: #000;
+}
+
+.sizes button:disabled{
+    background-color: #808080;
+    cursor: not-allowed;
+    color: #fff;
+}
+.sizes button.activeSize {
+    background-color: #fff; /* Warna latar belakang saat tombol aktif */
+    color: #000; /* Warna teks saat tombol aktif */
+}
+
+.displayStock{
+    margin: 10px 0px;
+}
+
+.cart{
+    width: 100%;
+    min-width: fit-content;
+    background-color: transparent;
+    border: 1px solid #fff;
+    margin: 10px 0px;
+}
+
+.cart:hover{
+    background-color: #fff;
+    color: #000;
+}
+
+.cart:disabled{
+    background-color: #808080;
+    cursor: not-allowed;
+    color: #fff;
+}

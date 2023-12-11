@@ -1,0 +1,32 @@
+.product {
+    width: 300px;
+    height: 400px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #000;
+    text-decoration: none;
+}
+  
+.product .imageProduct {
+    width: 100%;
+    max-height: 250px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+  
+/* .product h2 {
+    font-size: 16px;
+    color: #333;
+    margin: 0;
+  }
+  
+  .product p {
+    font-size: 14px;
+    color: #888;
+    margin: 0;
+  } */

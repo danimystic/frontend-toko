@@ -1,0 +1,48 @@
+.listOrder{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.linkContainer{
+    text-decoration: none;
+}
+
+.orderDetail{
+    background-color: transparent;
+    color: #fff;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    padding: 15px;
+    max-width: 500px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.orderDetail:hover{
+    background-color: #fff;
+    color: #000;
+}
+
+.top{
+    display: flex;
+}
+
+.price{
+    margin-left: auto;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+}
+
+.bottom{
+    display: flex;
+}
+
+.statusNow{
+    margin-left: auto;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+}

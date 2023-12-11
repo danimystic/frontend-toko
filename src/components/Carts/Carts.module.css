@@ -1,0 +1,122 @@
+.cartsAndOrder{
+    box-sizing: border-box;
+    padding: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+.left{
+    width: 700px;
+    min-width: 300px;
+    flex: 2;
+}
+
+.cartList{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.cartDetails{
+    display: flex;
+    gap: 10px;
+}
+
+.cartList img{
+    max-width: 150px;
+    height: auto;
+}
+
+.centerCart{
+    display: flex;
+    flex-direction: column;
+}
+
+.productName{
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+.centerCenterCart{
+    display: flex;
+    justify-self: flex-end;
+    margin-top: auto;
+}
+
+.inputQuantity{
+    width: 50px;
+    padding: 8px;
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    margin-right: 10px;
+    background-color: transparent;
+    color: #fff;
+    margin-left: auto;
+}
+
+.removeCart{
+    background-color: transparent;
+    justify-self: flex-end;
+    height: fit-content;
+    width: fit-content;
+}
+
+.rightCart{
+    margin-left: auto;
+}
+
+.right{
+    width: 300px;
+    flex: 1;
+}
+
+.order{
+    background-color: transparent;
+    color: #fff;
+}
+
+.order:hover{
+    background-color: #fff;
+    color: #000;
+}
+
+.labels{
+    text-align: left;
+    color: #fff;
+}
+
+/* Tambahkan ke file CSS atau tambahkan langsung ke komponen styles.js */
+.orderFormOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Warna hitam dengan opasitas 50% */
+    z-index: 1000; /* Menempatkan di atas elemen-elemen lain */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .orderForm {
+    background: #300; /* Warna latar belakang form */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Bayangan untuk efek elevasi */
+    z-index: 1001; /* Menempatkan di atas overlay */
+    position: relative; /* Menempatkan form di atas overlay */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 500px;
+  }
+
+.createOrder:disabled{
+    background-color: #808080;
+    color: #fff;
+}
+  
