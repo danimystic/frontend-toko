@@ -10,7 +10,7 @@ const Products = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch('http://localhost:9000/products', {
+                const response = await fetch(process.env.REACT_APP_BACKEND_URL+'/products', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

@@ -68,7 +68,7 @@ const AddProducts = () => {
         formData.append('image', product.image);
         formData.append('sizes', JSON.stringify(product.sizes));
         try {
-            const response = await fetch('http://localhost:9000/add-products', {
+            const response = await fetch(process.env.REACT_APP_BACKEND_URL+'/add-products', {
                 method: 'POST',
                 headers: {
                 },
@@ -91,7 +91,7 @@ const AddProducts = () => {
     useEffect(() => {
         const fetchSessionInfo = async () => {
             try {
-                const response = await fetch('http://localhost:9000/session-info', {
+                const response = await fetch(process.env.REACT_APP_BACKEND_URL+'/session-info', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

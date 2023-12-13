@@ -9,7 +9,7 @@ const AddToCart = ({isLoggedIn, productId, updatePostStatus}) => {
     useEffect(() => {
         const fetchStock = async () => {
             try {
-                 const response = await fetch(`http://localhost:9000/products/stock/${productId}`,{
+                 const response = await fetch(process.env.REACT_APP_BACKEND_URL+`/products/stock/${productId}`,{
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ const AddToCart = ({isLoggedIn, productId, updatePostStatus}) => {
 
     const addToCart = async () => {
         try {
-            const response = await fetch('http://localhost:9000/carts', {
+            const response = await fetch(process.env.REACT_APP_BACKEND_URL+'/carts', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

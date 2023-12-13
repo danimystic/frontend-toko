@@ -15,7 +15,7 @@ const Navbar = () => {
   useEffect(() => {
     const fetchSessionInfo = async () => {
       try {
-        const response = await fetch('http://localhost:9000/session-info', {
+        const response = await fetch(process.env.REACT_APP_BACKEND_URL+'/session-info', {
           method: 'GET',
           headers: {
               'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ const Navbar = () => {
           {isLoggedIn ? 
             (
               role === 'admin' ? (
-                <Dropdown items={['Dashboard', 'Profile', 'Orders', 'Logout']} isOpen={isOpen} />
+                <Dropdown items={['Add-Products', 'Profile', 'Orders', 'Logout']} isOpen={isOpen} />
               ) : 
               (
                 <Dropdown items={['Profile', 'Orders', 'Logout']} isOpen={isOpen}/>

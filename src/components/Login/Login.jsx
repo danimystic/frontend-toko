@@ -11,7 +11,7 @@ class Login extends React.Component {
         const password = e.target.elements.password.value;
 
         try {
-            const response = await fetch('http://localhost:9000/login', {
+            const response = await fetch(process.env.REACT_APP_BACKEND_URL+'/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

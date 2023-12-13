@@ -16,7 +16,7 @@ const DetailOrders = () => {
     useEffect(() => {
         const fetchSessionInfo = async () => {
             try {
-                const response = await fetch('http://localhost:9000/session-info', {
+                const response = await fetch(process.env.REACT_APP_BACKEND_URL+'/session-info', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ const DetailOrders = () => {
     useEffect(() => {
         const fetchCarts = async () => {
             try {
-                const response = await fetch(`http://localhost:9000/carts/${orderId}`, {
+                const response = await fetch(process.env.REACT_APP_BACKEND_URL+`/carts/${orderId}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ const DetailOrders = () => {
     useEffect(() => {
         const fetchOrder = async () => {
             try {
-                const response = await fetch(`http://localhost:9000/orders/${orderId}`, {
+                const response = await fetch(process.env.REACT_APP_BACKEND_URL+`/orders/${orderId}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ const DetailOrders = () => {
             const formData = new FormData();
             formData.append("image", selectedImage);
 
-            const response = await fetch(`http://localhost:9000/orders/${orderId}`, {
+            const response = await fetch(process.env.REACT_APP_BACKEND_URL+`/orders/${orderId}`, {
                 method: "POST",
                 body: formData,
                 credentials: 'include'
@@ -137,7 +137,7 @@ const DetailOrders = () => {
 
     const acceptPayment = async () => {
         try {
-            const response = await fetch(`http://localhost:9000/orders/${orderId}`, {
+            const response = await fetch(process.env.REACT_APP_BACKEND_URL+`/orders/${orderId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

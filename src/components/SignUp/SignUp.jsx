@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import styles from './SignUp.module.css'; 
@@ -9,20 +8,20 @@ const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const navigate = useNavigate();
-
     const handleSignup = async () => {
         try {
-            const response = await fetch('http://localhost:9000/signup', {
+            const response = await fetch(process.env.REACT_APP_BACKEND_URL+'/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                credentials: 'include',
                 body: JSON.stringify({ username, email, password }),
             });
 
             if (response.ok) {
-                navigate('/home');
+                const data = await response.json();
+                window.location.href = data.redirectTo;
                 Swal.fire({
                     icon: 'success',
                     title: 'Signup Successful',

@@ -8,7 +8,7 @@ const UpdateStock = ({ productId, onModifiedStatus}) => {
     useEffect(() => {
         const fetchStock = async () => {
             try {
-                const response = await fetch(`http://localhost:9000/products/stock/${productId}`, {
+                const response = await fetch(process.env.REACT_APP_BACKEND_URL+`/products/stock/${productId}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ const UpdateStock = ({ productId, onModifiedStatus}) => {
 
     const handleUpdate = async () => {
         try {
-            const response = await fetch(`http://localhost:9000/products/stock/${productId}`, {
+            const response = await fetch(process.env.REACT_APP_BACKEND_URL+`/products/stock/${productId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

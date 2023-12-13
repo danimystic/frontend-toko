@@ -15,7 +15,7 @@ const DetailProducts = () => {
     useEffect(() => {
         const fetchSessionInfo = async () => {
             try {
-                const response = await fetch('http://localhost:9000/session-info', {
+                const response = await fetch(process.env.REACT_APP_BACKEND_URL+'/session-info', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ const DetailProducts = () => {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                 const response = await fetch(`http://localhost:9000/products/${productId}`,{
+                 const response = await fetch(process.env.REACT_APP_BACKEND_URL+`/products/${productId}`,{
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

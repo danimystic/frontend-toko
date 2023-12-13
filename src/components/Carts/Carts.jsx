@@ -11,7 +11,7 @@ const Carts = () => {
     useEffect(() => {
         const fetchSessionInfo = async () => {
             try {
-                const response = await fetch('http://localhost:9000/session-info', {
+                const response = await fetch(process.env.REACT_APP_BACKEND_URL+'/session-info', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ const Carts = () => {
     useEffect(() => {
         const fetchCarts = async () => {
             try {
-                const response = await fetch('http://localhost:9000/carts', {
+                const response = await fetch(process.env.REACT_APP_BACKEND_URL+'/carts', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ const Carts = () => {
 
     const updateQuantity = async (cartId, quantity, index) => {
         try {
-            const response = await fetch(`http://localhost:9000/carts/${cartId}`, {
+            const response = await fetch(process.env.REACT_APP_BACKEND_URL+`/carts/${cartId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ const Carts = () => {
 
     const deleteCart = async (cartId) => {
         try {
-            const response = await fetch(`http://localhost:9000/carts/${cartId}`, {
+            const response = await fetch(process.env.REACT_APP_BACKEND_URL+`/carts/${cartId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -131,7 +131,7 @@ const Carts = () => {
     useEffect(() => {
         const fetchOrder = async () => {
             try {
-                const response = await fetch('http://localhost:9000/orders', {
+                const response = await fetch(process.env.REACT_APP_BACKEND_URL+'/orders', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -160,7 +160,7 @@ const Carts = () => {
 
     const createOrder = async () => {
         try {
-          const response = await fetch('http://localhost:9000/orders', {
+          const response = await fetch(process.env.REACT_APP_BACKEND_URL+'/orders', {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',

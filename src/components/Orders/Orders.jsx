@@ -12,7 +12,7 @@ const Orders = () => {
     useEffect(() => {
         const fetchSessionInfo = async () => {
             try {
-                const response = await fetch('http://localhost:9000/session-info', {
+                const response = await fetch(process.env.REACT_APP_BACKEND_URL+'/session-info', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ const Orders = () => {
     useEffect(() => {
         const fetchOrder = async () => {
             try {
-                const response = await fetch(`http://localhost:9000/orders/all`, {
+                const response = await fetch(process.env.REACT_APP_BACKEND_URL+`/orders/all`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

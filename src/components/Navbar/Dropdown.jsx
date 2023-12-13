@@ -11,9 +11,9 @@ function Dropdown({ isOpen, items}) {
             <li className={styles.dropdownContentList} key={index} >
                 {item === 'Logout' ? 
                     (
-                        <Link className={styles.dropdownContentLink} to={"http://localhost:9000/" + item}>{item}</Link>
+                        <Link className={styles.dropdownContentLink} to={process.env.REACT_APP_BACKEND_URL+'/'+item}>{item}</Link>
                     ) : 
-                    (<Link className={styles.dropdownContentLink} to={"http://localhost:3000/" + item}>{item}</Link>)
+                    (<Link className={styles.dropdownContentLink} to={process.env.REACT_APP_FRONTEND_URL + item}>{item}</Link>)
                 }
             </li>
           ))}
