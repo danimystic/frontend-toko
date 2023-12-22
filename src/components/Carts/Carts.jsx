@@ -198,18 +198,8 @@ const Carts = () => {
     
       const isOrderButtonDisabled = !recipientName || !address;
 
-    if(!carts){
+    if(!carts || !orders){
         return <div>Antara tidak ada atau loading</div>
-    }
-
-    if(!orders){
-        return (
-            <>
-                <Navbar />
-                <div style={{marginBottom: "100vh", paddingTop: "200px", textAlign: "center"}}>Cart Masih Kosong</div>
-                <Footer />
-            </>
-        );
     }
 
     return (
@@ -231,7 +221,7 @@ const Carts = () => {
                                             <div style={{fontWeight: "bold", fontSize: "13px"}}>Size: {item.size}</div>
                                             <input className={styles.inputQuantity}
                                                 type="number"
-                                                min="0"
+                                                min="1"
                                                 value={item.quantity}
                                                 onChange={(e) => updateQuantity(item.cartId, e.target.value, index)}
                                             />
