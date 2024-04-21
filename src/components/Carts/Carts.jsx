@@ -120,7 +120,7 @@ const Carts = () => {
                 newOrders.total = total;
                 setOrders(newOrders);
             }
-        } 
+        }
         catch (error) {
             console.error(error);
         }
@@ -141,7 +141,7 @@ const Carts = () => {
 
                 if(response.status === 200){
                     const data = await response.json();
-                    setOrders(data[0]);
+                    setOrders(data);
                 }
             } 
             catch (error) {
@@ -198,8 +198,8 @@ const Carts = () => {
     
       const isOrderButtonDisabled = !recipientName || !address;
 
-    if(!carts || !orders){
-        return <div>Antara tidak ada atau loading</div>
+    if(!carts){
+        setCarts([]);
     }
 
     return (
@@ -211,35 +211,37 @@ const Carts = () => {
                     <div className={styles.left}>
                         <h2>Carts</h2>
                         <div className={styles.cartList}>
-                            {carts.map((item, index) => (
-                                <div key={index} className={styles.cartDetails}>
-                                    <img src={item.imageUrl} alt={item.name} />
-                                    <div className={styles.centerCart}>
-                                        <h4 className={styles.productName}>{item.name}</h4>
-                                        <h5 style={{marginTop: "0", marginBottom: "0"}}>{item.gender}'s {item.category}</h5>
-                                        <div className={styles.centerCenterCart}>
-                                            <div style={{fontWeight: "bold", fontSize: "13px"}}>Size: {item.size}</div>
-                                            <input className={styles.inputQuantity}
-                                                type="number"
-                                                min="1"
-                                                value={item.quantity}
-                                                onChange={(e) => updateQuantity(item.cartId, e.target.value, index)}
-                                            />
+                            {
+                               carts.map((item, index) => (
+                                    <div key={index} className={styles.cartDetails}>
+                                        <img src={item.imageUrl} alt={item.name} />
+                                        <div className={styles.centerCart}>
+                                            <h4 className={styles.productName}>{item.name}</h4>
+                                            <h5 style={{marginTop: "0", marginBottom: "0"}}>{item.gender}'s {item.category}</h5>
+                                            <div className={styles.centerCenterCart}>
+                                                <div style={{fontWeight: "bold", fontSize: "13px"}}>Size: {item.size}</div>
+                                                <input className={styles.inputQuantity}
+                                                    type="number"
+                                                    min="1"
+                                                    value={item.quantity}
+                                                    onChange={(e) => updateQuantity(item.cartId, e.target.value, index)}
+                                                />
+                                            </div>
+                                            <button className={styles.removeCart} onClick={() => deleteCart(item.cartId)}>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                    <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                                                </svg>
+                                            </button>
                                         </div>
-                                        <button className={styles.removeCart} onClick={() => deleteCart(item.cartId)}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-trash3" viewBox="0 0 16 16">
-                                                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
-                                            </svg>
-                                        </button>
+                                        <div className={styles.rightCart}>Price: <PriceComponent price={item.price * item.quantity} /> </div>
                                     </div>
-                                    <div className={styles.rightCart}>Price: <PriceComponent price={item.price * item.quantity} /> </div>
-                                </div>
-                            ))}
+                                ))
+                            }
                         </div>
                     </div>
                     <div className={styles.right} >
                         <h2>Summary</h2>
-                        <PriceComponent  price={orders.total}/>
+                        <PriceComponent  price={orders ? orders.total : 0}/>
                         <button className={styles.order} onClick={toggleOrderForm}>
                             Order
                         </button>
