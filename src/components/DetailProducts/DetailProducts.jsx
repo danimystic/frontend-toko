@@ -55,7 +55,7 @@ const DetailProducts = () => {
 
                 if(response.status === 200){
                     const data = await response.json();
-                    setProduct(data[0]);
+                    setProduct(data);
                 }
                 else{
                     console.error("Error at fetching");
