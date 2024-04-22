@@ -44,8 +44,8 @@ const Navbar = () => {
         <Link to="/home" className={styles["text-wrapper-12"]}>Dann's Jacket World</Link>
       </div>
       <div className={styles["tengah"]}>
-        <Link to="" className={styles["text-wrapper-10"]}>Men</Link>
-        <Link to="" className={styles["text-wrapper-11"]}>Women</Link>
+        <Link to="/products?gender=Men&category=All" className={styles["text-wrapper-10"]}>Men</Link>
+        <Link to="/products?gender=Women&category=All" className={styles["text-wrapper-11"]}>Women</Link>
       </div>
       <div className={styles["kanan"]}>
         <Link to="/products">

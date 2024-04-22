@@ -3,9 +3,16 @@ import ProductList from "./ProductList";
 import styles from "./Products.module.css";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Products = () => {
+    // const [products, setProducts] = useState([]);
     const [products, setProducts] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [selectedGender, setSelectedGender] = useState('All');
+    const [selectedCategory, setSelectedCategory] = useState('All');
+    const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -30,9 +37,44 @@ const Products = () => {
         fetchProducts();
     }, []);
 
-    const [searchTerm, setSearchTerm] = useState('');
-    const [selectedGender, setSelectedGender] = useState('All');
-    const [selectedCategory, setSelectedCategory] = useState('All');
+    // const [searchTerm, setSearchTerm] = useState('');
+    // const [selectedGender, setSelectedGender] = useState('All');
+    // const [selectedCategory, setSelectedCategory] = useState('All');
+
+    // Fungsi untuk mengambil parameter dari URL
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const gender = params.get('gender');
+        const category = params.get('category');
+        if (gender) setSelectedGender(gender);
+        if (category) setSelectedCategory(category);
+    }, [location.search]);
+
+    // Fungsi untuk menangani klik tombol Gender
+    // const handleGenderClick = (gender) => {
+    //     setSelectedGender(gender);
+    //     setSearchTerm('');
+    //     history.push(`/products?gender=${gender}&category=${selectedCategory}`);
+    // };
+    const handleGenderClick = (e) => {
+        const selectedValue = e.target.value;
+        setSelectedGender(selectedValue);
+        setSearchTerm('');
+        navigate(`/products?gender=${selectedValue}&category=${selectedCategory}`);
+    };
+
+    // Fungsi untuk menangani klik tombol Category
+    // const handleCategoryClick = (category) => {
+    //     setSelectedCategory(category);
+    //     setSearchTerm('');
+    //     history.push(`/products?gender=${selectedGender}&category=${category}`);
+    // };
+    const handleCategoryClick = (e) => {
+        const selectedValue = e.target.value;
+        setSelectedCategory(selectedValue);
+        setSearchTerm('');
+        navigate(`/products?gender=${selectedGender}&category=${selectedValue}`);
+    };
     
     const filteredProducts = products
         .filter((product) => product.name.toLowerCase().includes(searchTerm.toLowerCase()))
@@ -55,8 +97,10 @@ const Products = () => {
                     <label>
                         Gender:
                         <select
+                            // value={selectedGender}
+                            // onChange={(e) => setSelectedGender(e.target.value)}
                             value={selectedGender}
-                            onChange={(e) => setSelectedGender(e.target.value)}
+                            onChange={handleGenderClick}
                         >
                             <option value="All">All</option>
                             <option value="Men">Men</option>
@@ -66,8 +110,10 @@ const Products = () => {
                     <label>
                         Category:
                         <select
+                            // value={selectedCategory}
+                            // onChange={(e) => setSelectedCategory(e.target.value)}
                             value={selectedCategory}
-                            onChange={(e) => setSelectedCategory(e.target.value)}
+                            onChange={handleCategoryClick}
                         >
                             <option value="All">All</option>
                             <option value="Varsity">Varsity</option>
