@@ -8,14 +8,30 @@
 }
 
 .productImage{
-    width: 500px;
     min-width: 300px;
+    height: 600px;
     flex: 1;
+    border-radius: 8px ;
 }
 
 .right{
     width: 500px;
     flex: 1;
+}
+
+.productName{
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.productGenderAndCategory{
+    margin-bottom: 10px;
+}
+
+.price{
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #f22e52;
 }
 
 .productDescription{

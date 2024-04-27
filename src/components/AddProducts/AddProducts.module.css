@@ -1,12 +1,98 @@
 .addProductsForm{
-    padding: 200px;
-    box-sizing: border-box;
+    margin: 0 auto;
     color: #f9f9f9;
     display: flex;
+    box-sizing: border-box;
     flex-direction: column;
     gap: 20px;
 }
 
+
+.formContainer{
+    padding: 150px 200px 200px 200px;
+}
+
+.formContainer h1{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
 .formList{
+    display: flex;
+    flex-direction: column;
+}
+
+.formList label{
     color: #f9f9f9;
+    font-size: 16px;
+}
+
+.formList input,
+.formList select, 
+.formList textarea{
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #222933;
+}
+
+.formList input:hover, select:hover, textarea:hover{
+    background: #415169;
+    color: #f9f9f9;
+}
+
+.formList input:focus{
+    outline: none;
+}
+
+.formList select{
+    cursor: pointer;
+}
+
+.size{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.size label{
+    color: #f9f9f9;
+    font-size: 16px;
+}
+
+.itemSize{
+    display: flex;
+    gap: 10px;
+}
+
+.size .itemSize input{
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #222933;
+}
+
+.size input:hover{
+    background: #415169;
+    color: #f9f9f9;
+}
+
+.addProductsForm button{
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f22e52;
+    color: #f9f9f9;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.addProductsForm button:hover{
+    background-color: #f9f9f9;
+    color: #f22e52;
+    font-weight: bold;
 }

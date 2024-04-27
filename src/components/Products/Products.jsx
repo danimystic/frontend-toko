@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import ProductList from "./ProductList";
 import styles from "./Products.module.css";
 import Navbar from "../Navbar/Navbar";
@@ -7,6 +7,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 const Products = () => {
     // const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [products, setProducts] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedGender, setSelectedGender] = useState('All');
@@ -24,14 +25,17 @@ const Products = () => {
                     },
                     credentials: 'include'
                 });
-    
-                if(response.status === 200){
+
+                if (response.status === 200){
                     const data = await response.json();
                     setProducts(data);
                 }
-            } 
+            }
             catch (error) {
                 console.error(error);
+            }
+            finally {
+                setLoading(false);
             }
         };
         fetchProducts();
@@ -75,27 +79,27 @@ const Products = () => {
         setSearchTerm('');
         navigate(`/products?gender=${selectedGender}&category=${selectedValue}`);
     };
-    
+
     const filteredProducts = products
         .filter((product) => product.name.toLowerCase().includes(searchTerm.toLowerCase()))
         .filter((product) => selectedGender === 'All' || product.gender === selectedGender)
         .filter((product) => selectedCategory === 'All' || product.category === selectedCategory);
-    
+
     return (
         <>
             <Navbar />
-            <div style={{padding: "100px"}}>
-                <div>
+            <div className={styles.container}>
+                <div className={styles.search}>
                     <input
                         type="text"
                         placeholder="Search products..."
                         value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)} 
+                        onChange={(e) => setSearchTerm(e.target.value)}
                     />
-                    </div>
-                    <div>
-                    <label>
-                        Gender:
+                </div>
+                <div className={styles.list}>
+                    <div className={styles.listItem}>
+                        <label>Gender:</label>
                         <select
                             // value={selectedGender}
                             // onChange={(e) => setSelectedGender(e.target.value)}
@@ -106,9 +110,9 @@ const Products = () => {
                             <option value="Men">Men</option>
                             <option value="Women">Women</option>
                         </select>
-                    </label>
-                    <label>
-                        Category:
+                    </div>
+                    <div className={styles.listItem}>
+                        <label>Category:</label>
                         <select
                             // value={selectedCategory}
                             // onChange={(e) => setSelectedCategory(e.target.value)}
@@ -122,11 +126,25 @@ const Products = () => {
                             <option value="Coach">Coach</option>
                             <option value="Canvas">Canvas</option>
                         </select>
-                    </label>
+                    </div>
                 </div>
-                <ProductList products={filteredProducts} />
+                <div className={styles.listProduct}>
+                    {loading ? (
+                        <div className={styles.loading}>
+                            <p>Loading...</p>
+                        </div>
+                    ) : (
+                        filteredProducts.length === 0 ? (
+                            <div className={styles.notProduct}>
+                                <p>No products available</p>
+                            </div>
+                        ) : (
+                            <ProductList products={filteredProducts} />
+                        )
+                    )}
+                </div>
             </div>
-        <Footer />
+            {/* <Footer /> */}
         </>
     );
 };
