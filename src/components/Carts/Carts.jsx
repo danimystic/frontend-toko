@@ -64,8 +64,24 @@ const Carts = () => {
         fetchCarts();
     }, []);
 
+    const [isUpdatingQuantity, setIsUpdatingQuantity] = useState(false);
+
     const updateQuantity = async (cartId, quantity, index) => {
         try {
+
+            setIsUpdatingQuantity(true);
+
+            const newCarts = [...carts];
+            newCarts[index].quantity = parseInt(quantity);
+            setCarts(newCarts);
+            let total = 0;
+            for (const i in newCarts) {
+                total += newCarts[i].quantity * newCarts[i].price;
+            }
+            const newOrders = { ...orders };
+            newOrders.total = total;
+            setOrders(newOrders);
+
             const response = await fetch(process.env.REACT_APP_BACKEND_URL + `/carts/${cartId}`, {
                 method: 'PUT',
                 headers: {
@@ -76,30 +92,30 @@ const Carts = () => {
             });
 
             if (response.status === 200) {
-                const newCarts = [...carts];
-                newCarts[index].quantity = parseInt(quantity);
-                setCarts(newCarts);
-
-                let total = 0;
-                for (const i in carts) {
-                    total += carts[i].quantity * carts[i].price;
-                }
-
-                const newOrders = { ...orders };
-                newOrders.total = total;
-                setOrders(newOrders);
-
+                setIsUpdatingQuantity(false);
             }
         }
         catch (error) {
             console.error(error);
+            setIsUpdatingQuantity(false);
         }
 
     };
 
     const deleteCart = async (cartId) => {
         try {
-            const response = await fetch(process.env.REACT_APP_BACKEND_URL + `/carts/${cartId}`, {
+
+            const newCarts = carts.filter((cart) => cart.cartId !== cartId);
+            setCarts(newCarts);
+            let total = 0;
+            for (const i in newCarts) {
+                total += newCarts[i].quantity * newCarts[i].price;
+            }
+            const newOrders = { ...orders };
+            newOrders.total = total;
+            setOrders(newOrders);
+
+            await fetch(process.env.REACT_APP_BACKEND_URL + `/carts/${cartId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -107,19 +123,9 @@ const Carts = () => {
                 credentials: 'include',
             });
 
-            if (response.status === 200) {
-                const newCarts = carts.filter((cart) => cart.cartId !== cartId);
-                setCarts(newCarts);
-
-                let total = 0;
-                for (const i in carts) {
-                    total += carts[i].quantity * carts[i].price;
-                }
-
-                const newOrders = { ...orders };
-                newOrders.total = total;
-                setOrders(newOrders);
-            }
+            // if (response.status === 200) {
+                
+            // }
         }
         catch (error) {
             console.error(error);
@@ -228,12 +234,25 @@ const Carts = () => {
                                                             <h4 className={styles.productName}>{item.name}</h4>
                                                             <p style={{ marginTop: "0", marginBottom: "0" }}>{item.gender}'s {item.category}</p>
                                                             <div style={{ fontSize: "13px" }}>Size: {item.size}</div>
-                                                            <input className={styles.inputQuantity}
-                                                                type="number"
-                                                                min="1"
-                                                                value={item.quantity}
-                                                                onChange={(e) => updateQuantity(item.cartId, e.target.value, index)}
-                                                            />
+                                                            {isUpdatingQuantity === true ? 
+                                                                (
+                                                                    <input className={styles.inputQuantity}
+                                                                        type="text"
+                                                                        value={item.quantity}
+                                                                        disabled="true"
+                                                                    />
+                                                                )
+                                                                :
+                                                                (
+                                                                    <input className={styles.inputQuantity}
+                                                                        type="number"
+                                                                        min="1"
+                                                                        value={item.quantity}
+                                                                        onChange={(e) => updateQuantity(item.cartId, e.target.value, index)}
+                                                                    />
+                                                                )
+                                                            }
+
                                                         </div>
                                                     </div>
                                                     <div className={styles.rightCart}>
