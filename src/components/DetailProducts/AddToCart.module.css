@@ -33,13 +33,13 @@
 .cart{
     width: 100%;
     min-width: fit-content;
-    background-color: transparent;
+    background-color: #f22e52;
     border: 1px solid #fff;
     margin: 10px 0px;
 }
 
 .cart:hover{
-    background-color: #fff;
+    background-color: #ff9bad;
     color: #000;
 }
 
