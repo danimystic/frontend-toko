@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import Dropdown from "./Dropdown";
 
+
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [role, setRole] = useState('');
