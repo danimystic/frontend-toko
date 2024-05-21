@@ -9,8 +9,8 @@ const Product = ({ productId, name, category, gender, imageUrl, price }) => (
     <img src={imageUrl} alt={name} className={styles.imageProduct} />
     <div className="product-details">
       <h3>{name}</h3>
-      <p>{gender}'s {category}</p>
-      <p><PriceComponent price={price}/></p>
+      <p style={{color:'#888'}}>{gender}'s {category}</p>
+      <p style={{color:'#f22e52', fontWeight:'bold'}}><PriceComponent price={price}/></p>
     </div>
   </Link>
 );

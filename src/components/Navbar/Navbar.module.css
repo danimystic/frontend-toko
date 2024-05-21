@@ -1,5 +1,5 @@
 .header {
-  background-color: #111111;
+  background-color: #222933;
   height: 93px;
   left: 0;
   position: fixed;
@@ -27,6 +27,10 @@
   text-decoration: none;
 }
 
+.text-wrapper-12:hover{
+  color: #f22e52;
+}
+
 .tengah {
   align-items: center;
   display: inline-flex;
@@ -39,7 +43,7 @@
   color: #ffffff;
   font-family: "Helvetica Neue Medium Extended-Regular", Helvetica;
   font-size: 15px;
-  font-weight: 400;
+  font-weight: bold;
   height: 17px;
   letter-spacing: 0;
   line-height: 24px;
@@ -54,7 +58,7 @@
   color: #ffffff;
   font-family: "Helvetica Neue Medium Extended-Regular", Helvetica;
   font-size: 15px;
-  font-weight: 400;
+  font-weight: bold;
   height: 17px;
   letter-spacing: 0;
   line-height: 24px;
@@ -63,6 +67,11 @@
   white-space: nowrap;
   width: 99px;
   text-decoration: none;
+}
+
+.text-wrapper-10:hover,
+.text-wrapper-11:hover {
+  color: #f22e52;
 }
 
 .kanan {
@@ -76,4 +85,10 @@
 
 .profile-icon:hover{
   cursor: pointer;
+}
+
+.iconSearch:hover,
+.iconChart:hover,
+.iconProfile:hover {
+  fill: #f22e52;
 }

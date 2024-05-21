@@ -136,10 +136,10 @@ const DetailProducts = () => {
         <div className={styles.outerDetailProducts}>
             <img src={product.imageUrl} className={styles.productImage} alt={product.name} />
             <div className={styles.right}>
-                <h1 className={styles.productName} style={{marginBottom: "0px"}} >
+                <h1 className={styles.productName}>
                     {product.name}
                 </h1>
-                <h4 className={styles.productGenderAndCategory} style={{marginTop: "5px"}}>
+                <h4 className={styles.productGenderAndCategory}>
                     {product.gender}'s {product.category}
                 </h4>
                 <h5 className={styles.price}>
@@ -148,6 +148,7 @@ const DetailProducts = () => {
                 <div className={styles.productDescription}>
                     {product.description}
                 </div>
+                <div>
                 {
                     role !== "admin" ? 
                     (
@@ -157,10 +158,10 @@ const DetailProducts = () => {
                         <UpdateStock productId={productId} onModifiedStatus={onModifiedStatus}/>
                     )
                 }
+                </div>
             </div>
         </div>
-            
-        <Footer />
+        {/* <Footer /> */}
         </>
     );
 };
