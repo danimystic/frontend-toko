@@ -1,7 +1,6 @@
 .productList{
     padding-inline: 12px;
     display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
     margin-bottom: 30px;
+    gap: 20px;
 }
