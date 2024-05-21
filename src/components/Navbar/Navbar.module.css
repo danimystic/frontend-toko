@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Jacquard+24&family=Sedan+SC&display=swap');
+
 .header {
-  background-color: #222933;
+  background-color: #222831;
   height: 93px;
   left: 0;
   position: fixed;
@@ -15,8 +17,9 @@
 
 .text-wrapper-12 {
   color: #ffffff;
-  font-family: "Helvetica Neue Medium Extended-Regular", Helvetica;
-  font-size: 24px;
+  font-family: "Jacquard 24", system-ui;
+  font-style: normal;
+  font-size: 30px;
   font-weight: 400;
   letter-spacing: 0;
   line-height: 24px;
@@ -28,7 +31,7 @@
 }
 
 .text-wrapper-12:hover{
-  color: #f22e52;
+  color: #d6e2ad;
 }
 
 .tengah {
@@ -41,9 +44,10 @@
 
 .text-wrapper-10 {
   color: #ffffff;
-  font-family: "Helvetica Neue Medium Extended-Regular", Helvetica;
-  font-size: 15px;
-  font-weight: bold;
+  font-family: "Sedan SC", serif;
+  font-style: normal;
+  font-size: 22px;
+  font-weight: 400;
   height: 17px;
   letter-spacing: 0;
   line-height: 24px;
@@ -56,9 +60,10 @@
 
 .text-wrapper-11 {
   color: #ffffff;
-  font-family: "Helvetica Neue Medium Extended-Regular", Helvetica;
-  font-size: 15px;
-  font-weight: bold;
+  font-family: "Sedan SC", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 22px;
   height: 17px;
   letter-spacing: 0;
   line-height: 24px;
@@ -69,9 +74,12 @@
   text-decoration: none;
 }
 
-.text-wrapper-10:hover,
 .text-wrapper-11:hover {
-  color: #f22e52;
+  color: #ddc1e8;
+}
+
+.text-wrapper-10:hover {
+  color: #a1c5f8;
 }
 
 .kanan {
@@ -90,5 +98,5 @@
 .iconSearch:hover,
 .iconChart:hover,
 .iconProfile:hover {
-  fill: #f22e52;
+  fill: #d6e2ad;
 }
