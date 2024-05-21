@@ -1,10 +1,10 @@
 // Carousel.jsx
 import React from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import styles from "./Carousel.module.css"; 
 import { Link } from "react-router-dom";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+import styles from "./Carousel.module.css";
 
 
 const Carousel = () => {
@@ -36,7 +36,7 @@ const Carousel = () => {
           className={styles.image}
         />
         <div className={styles.caption}>
-          <h2>Product 2</h2>
+          <h2>Erika coach Jacket <br/> Wander Lust black</h2>
         </div>
       </Link>
 
@@ -47,7 +47,7 @@ const Carousel = () => {
           className={styles.image}
         />
         <div className={styles.caption}>
-          <h2>Product 3</h2>
+          <h2>Erifa coach Jacket <br/> Wander Lust brown</h2>
         </div>
       </Link>
     </Slider>

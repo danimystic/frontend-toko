@@ -12,7 +12,7 @@ function Dropdown({ isOpen, items}) {
                 {item === 'Logout' ? 
                     (
                         <Link className={styles.dropdownContentLink} to={process.env.REACT_APP_BACKEND_URL+'/'+item}>{item}</Link>
-                    ) : 
+                    ) :
                     (<Link className={styles.dropdownContentLink} to={'/'+item}>{item}</Link>)
                 }
             </li>
