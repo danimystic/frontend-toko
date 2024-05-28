@@ -208,6 +208,15 @@ const Carts = () => {
         setCarts([]);
     }
 
+    const handleKeyDown = (event) => {
+        const charCode = event.keyCode;
+        if (charCode < 48 || charCode > 57) {
+            if (charCode !== 8 && charCode !== 46) { // Allow backspace and delete
+                event.preventDefault();
+            }
+        }
+    };
+
     return (
         <>
             {isClient && (
@@ -249,6 +258,7 @@ const Carts = () => {
                                                                         min="1"
                                                                         value={item.quantity}
                                                                         onChange={(e) => updateQuantity(item.cartId, e.target.value, index)}
+                                                                        onKeyDown={handleKeyDown}
                                                                     />
                                                                 )
                                                             }
