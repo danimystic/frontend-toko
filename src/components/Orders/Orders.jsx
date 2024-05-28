@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import styles from './Orders.module.css';
-import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
 import PriceComponent from "../PriceComponent/PriceComponent";
 

@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import ProductList from "./ProductList";
 import styles from "./Products.module.css";
 import Navbar from "../Navbar/Navbar";
-import Footer from "../Footer/Footer";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Pagination, Text } from '@mantine/core';
+import { Pagination } from '@mantine/core';
 
 function chunk(array, size) {
     if (!array.length) {
@@ -146,7 +145,7 @@ const Products = () => {
                         mt="sm"
                         color="#f22e52"
                     />
-                </div>
+                </div>   
             </div>
         </>
     );

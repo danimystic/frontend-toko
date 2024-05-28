@@ -14,7 +14,7 @@
 
 .body {
   width: 100%;
-  padding-bottom: 198px;
+  padding-bottom: 120px;
   padding-top: 93px;
 }
 
@@ -23,7 +23,12 @@
 }
 
 .title {
+  margin-top: 20px;
   margin-bottom: 20px;
+
+  @media screen and (max-width: 768px) {
+    margin-bottom: 0;
+  }
 }
 
 .titleText {
@@ -39,6 +44,7 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   justify-items: center;
+  margin-inline: 20px;
 }
 
 .item {
@@ -47,6 +53,10 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s, box-shadow 0.3s;
+
+  @media screen and (max-width: 768px) {
+    margin: 20px;
+  }
 }
 
 .item:hover {

@@ -1,10 +1,23 @@
 import React from "react";
-import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
-import Carousel from "./Carousel";
+import { Carousel as MantineCarousel } from '@mantine/carousel';
 import styles from "./Home.module.css";
+import { useMediaQuery } from '@mantine/hooks';
+import Carousel from "./Carousel";
+import { Link } from "react-router-dom";
 
 const Home = () => {
+  const isMobile = useMediaQuery('(max-width: 768px)');
+
+  const categories = [
+    { id: 1, img: "https://c.animaapp.com/Yz41YjBx/img/image-3@2x.png", title: "Varsity"},
+    { id: 2, img: "/images/Hoodie.jpeg", title: "Hoodie" },
+    { id: 3, img: "https://c.animaapp.com/Yz41YjBx/img/image-5@2x.png", title: "Sweater" },
+    { id: 4, img: "https://c.animaapp.com/Yz41YjBx/img/image-6@2x.png", title: "Coach" },
+    { id: 4, img: "https://c.animaapp.com/Yz41YjBx/img/image-6@2x.png", title: "Canvas" },
+
+  ];
+
   return (
     <div className={styles.landingPage}>
       <Navbar />
@@ -14,39 +27,37 @@ const Home = () => {
           <div className={styles.title}>
             <div className={styles.titleText}>Categories</div>
           </div>
-          <div className={styles.items}>
-            <div className={styles.item}>
-              <img className={styles.image} alt="varsity" src="https://c.animaapp.com/Yz41YjBx/img/image-3@2x.png" />
-              <div className={styles.card}>
-                <h3>jaket</h3>
-                <p>10% Off</p>
-              </div>
+          {isMobile ? (
+            <MantineCarousel withIndicators height={410} loop>
+              {categories.map((category) => (
+                <MantineCarousel.Slide key={category.id}>
+                  <Link>
+                    <div className={styles.item}>
+                      <img className={styles.image} alt={category.title} src={category.img} />
+                      <div className={styles.card}>
+                        <h3>{category.title}</h3>
+                      </div>
+                    </div>
+                  </Link>
+                </MantineCarousel.Slide>
+              ))}
+            </MantineCarousel>
+          ) : (
+            <div className={styles.items}>
+              {categories.map((category) => (
+                <Link>
+                  <div className={styles.item} key={category.id}>
+                    <img className={styles.image} alt={category.title} src={category.img} />
+                    <div className={styles.card}>
+                      <h3>{category.title}</h3>
+                    </div>
+                  </div>
+                </Link>
+              ))}
             </div>
-            <div className={styles.item}>
-              <img className={styles.image} alt="coach" src="https://c.animaapp.com/Yz41YjBx/img/image-4@2x.png" />
-              <div className={styles.card}>
-                <h3>kemeja</h3>
-                <p>10% Off</p>
-              </div>
-            </div>
-            <div className={styles.item}>
-              <img className={styles.image} alt="canvas" src="https://c.animaapp.com/Yz41YjBx/img/image-5@2x.png" />
-              <div className={styles.card}>
-                <h3>kemeja</h3>
-                <p>10% Off</p>
-              </div>
-            </div>
-            <div className={styles.item}>
-              <img className={styles.image} alt="sweater" src="https://c.animaapp.com/Yz41YjBx/img/image-6@2x.png" />
-              <div className={styles.card}>
-                <h3>Hoodie</h3>
-                <p>10% Off</p>
-              </div>
-            </div>
-          </div>
+          )}
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
