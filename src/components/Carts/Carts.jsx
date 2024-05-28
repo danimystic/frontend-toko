@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styles from './Carts.module.css';
-import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
 import PriceComponent from "../PriceComponent/PriceComponent";
 

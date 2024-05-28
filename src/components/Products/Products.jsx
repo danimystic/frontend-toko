@@ -2,23 +2,34 @@ import React, { useState, useEffect } from "react";
 import ProductList from "./ProductList";
 import styles from "./Products.module.css";
 import Navbar from "../Navbar/Navbar";
-import Footer from "../Footer/Footer";
 import { useNavigate, useLocation } from "react-router-dom";
+import { Pagination } from '@mantine/core';
+
+function chunk(array, size) {
+    if (!array.length) {
+        return [];
+    }
+    const head = array.slice(0, size);
+    const tail = array.slice(size);
+    return [head, ...chunk(tail, size)];
+}
 
 const Products = () => {
-    // const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [products, setProducts] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedGender, setSelectedGender] = useState('All');
     const [selectedCategory, setSelectedCategory] = useState('All');
+    const [currentPage, setCurrentPage] = useState(1); // State for current page
+    const [productsPerPage] = useState(4); // State for products per page, set to 6
+
     const navigate = useNavigate();
     const location = useLocation();
 
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch(process.env.REACT_APP_BACKEND_URL+'/products', {
+                const response = await fetch(process.env.REACT_APP_BACKEND_URL + '/products', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -26,26 +37,19 @@ const Products = () => {
                     credentials: 'include'
                 });
 
-                if (response.status === 200){
+                if (response.status === 200) {
                     const data = await response.json();
                     setProducts(data);
                 }
-            }
-            catch (error) {
+            } catch (error) {
                 console.error(error);
-            }
-            finally {
+            } finally {
                 setLoading(false);
             }
         };
         fetchProducts();
     }, []);
 
-    // const [searchTerm, setSearchTerm] = useState('');
-    // const [selectedGender, setSelectedGender] = useState('All');
-    // const [selectedCategory, setSelectedCategory] = useState('All');
-
-    // Fungsi untuk mengambil parameter dari URL
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         const gender = params.get('gender');
@@ -54,29 +58,19 @@ const Products = () => {
         if (category) setSelectedCategory(category);
     }, [location.search]);
 
-    // Fungsi untuk menangani klik tombol Gender
-    // const handleGenderClick = (gender) => {
-    //     setSelectedGender(gender);
-    //     setSearchTerm('');
-    //     history.push(`/products?gender=${gender}&category=${selectedCategory}`);
-    // };
     const handleGenderClick = (e) => {
         const selectedValue = e.target.value;
         setSelectedGender(selectedValue);
         setSearchTerm('');
+        setCurrentPage(1); // Reset to first page
         navigate(`/products?gender=${selectedValue}&category=${selectedCategory}`);
     };
 
-    // Fungsi untuk menangani klik tombol Category
-    // const handleCategoryClick = (category) => {
-    //     setSelectedCategory(category);
-    //     setSearchTerm('');
-    //     history.push(`/products?gender=${selectedGender}&category=${category}`);
-    // };
     const handleCategoryClick = (e) => {
         const selectedValue = e.target.value;
         setSelectedCategory(selectedValue);
         setSearchTerm('');
+        setCurrentPage(1); // Reset to first page
         navigate(`/products?gender=${selectedGender}&category=${selectedValue}`);
     };
 
@@ -84,6 +78,10 @@ const Products = () => {
         .filter((product) => product.name.toLowerCase().includes(searchTerm.toLowerCase()))
         .filter((product) => selectedGender === 'All' || product.gender === selectedGender)
         .filter((product) => selectedCategory === 'All' || product.category === selectedCategory);
+
+    // Split products into chunks
+    const paginatedProducts = chunk(filteredProducts, productsPerPage);
+    const currentProducts = paginatedProducts[currentPage - 1] || [];
 
     return (
         <>
@@ -101,8 +99,6 @@ const Products = () => {
                     <div className={styles.listItem}>
                         <label>Gender:</label>
                         <select
-                            // value={selectedGender}
-                            // onChange={(e) => setSelectedGender(e.target.value)}
                             value={selectedGender}
                             onChange={handleGenderClick}
                         >
@@ -114,8 +110,6 @@ const Products = () => {
                     <div className={styles.listItem}>
                         <label>Category:</label>
                         <select
-                            // value={selectedCategory}
-                            // onChange={(e) => setSelectedCategory(e.target.value)}
                             value={selectedCategory}
                             onChange={handleCategoryClick}
                         >
@@ -134,17 +128,25 @@ const Products = () => {
                             <p>Loading...</p>
                         </div>
                     ) : (
-                        filteredProducts.length === 0 ? (
+                        currentProducts.length === 0 ? (
                             <div className={styles.notProduct}>
                                 <p>No products available</p>
                             </div>
                         ) : (
-                            <ProductList products={filteredProducts} />
+                            <ProductList products={currentProducts} />
                         )
                     )}
                 </div>
+                <div className={styles.containerPagination}>
+                    <Pagination
+                        total={paginatedProducts.length}
+                        value={currentPage}
+                        onChange={setCurrentPage}
+                        mt="sm"
+                        color="#f22e52"
+                    />
+                </div>   
             </div>
-            {/* <Footer /> */}
         </>
     );
 };

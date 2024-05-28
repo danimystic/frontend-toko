@@ -1,56 +1,63 @@
 import React from "react";
-import styles from "./Home.module.css";
 import Navbar from "../Navbar/Navbar";
-import Footer from "../Footer/Footer";
+import { Carousel as MantineCarousel } from '@mantine/carousel';
+import styles from "./Home.module.css";
+import { useMediaQuery } from '@mantine/hooks';
 import Carousel from "./Carousel";
+import { Link } from "react-router-dom";
 
-export const Home = () => {
-    return (
-    <div className={styles["landing-page"]}>
-            <Navbar />
-            <div className={styles["body"]}>
-                <Carousel />
-                <div className={styles["categories"]}>
-                    <div className={styles["tulisan-2"]}>
-                        <div className={styles["text-wrapper-8"]}>Categories</div>
+const Home = () => {
+  const isMobile = useMediaQuery('(max-width: 768px)');
+
+  const categories = [
+    { id: 1, img: "https://c.animaapp.com/Yz41YjBx/img/image-3@2x.png", title: "Varsity"},
+    { id: 2, img: "/images/Hoodie.jpeg", title: "Hoodie" },
+    { id: 3, img: "https://c.animaapp.com/Yz41YjBx/img/image-5@2x.png", title: "Sweater" },
+    { id: 4, img: "https://c.animaapp.com/Yz41YjBx/img/image-6@2x.png", title: "Coach" },
+    { id: 4, img: "https://c.animaapp.com/Yz41YjBx/img/image-6@2x.png", title: "Canvas" },
+
+  ];
+
+  return (
+    <div className={styles.landingPage}>
+      <Navbar />
+      <div className={styles.body}>
+        <Carousel />
+        <div className={styles.categories}>
+          <div className={styles.title}>
+            <div className={styles.titleText}>Categories</div>
+          </div>
+          {isMobile ? (
+            <MantineCarousel withIndicators height={410} loop>
+              {categories.map((category) => (
+                <MantineCarousel.Slide key={category.id}>
+                  <Link>
+                    <div className={styles.item}>
+                      <img className={styles.image} alt={category.title} src={category.img} />
+                      <div className={styles.card}>
+                        <h3>{category.title}</h3>
+                      </div>
                     </div>
-                    <div className={styles["isi"]}>
-                        <div className={styles["varsity"]}>
-                            <img className={styles["gambar"]} alt="varsity" src="https://c.animaapp.com/Yz41YjBx/img/image-3@2x.png" />
-                            <div className={styles["auto-layout-vertical-wrapper"]}>
-                                <div className={styles["auto-layout-vertical-3"]}>
-                                    <div className={styles["text-wrapper-7"]}>Varsity</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className={styles["coach"]}>
-                            <img className={styles["gambar"]} alt="coach" src="https://c.animaapp.com/Yz41YjBx/img/image-4@2x.png" />
-                            <div className={styles["auto-layout-vertical-wrapper"]}>
-                                <div className={styles["auto-layout-vertical-2"]}>
-                                    <div className={styles["text-wrapper-7"]}>Coach</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className={styles["canvas"]}>
-                            <img className={styles["gambar"]} alt="canvas" src="https://c.animaapp.com/Yz41YjBx/img/image-5@2x.png" />
-                            <div className={styles["auto-layout-vertical-wrapper"]}>
-                                <div className={styles["canvas-wrapper"]}>
-                                    <div className={styles["text-wrapper-7"]}>Canvas</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className={styles["sweater"]}>
-                            <img className={styles["gambar"]} alt="sweater" src="https://c.animaapp.com/Yz41YjBx/img/image-6@2x.png" />
-                            <div className={styles["tulisan"]}>
-                                <div className={styles["auto-layout-vertical"]}>
-                                    <div className={styles["text-wrapper-7"]}>Sweater</div>
-                                </div>
-                            </div>
-                        </div>
+                  </Link>
+                </MantineCarousel.Slide>
+              ))}
+            </MantineCarousel>
+          ) : (
+            <div className={styles.items}>
+              {categories.map((category) => (
+                <Link>
+                  <div className={styles.item} key={category.id}>
+                    <img className={styles.image} alt={category.title} src={category.img} />
+                    <div className={styles.card}>
+                      <h3>{category.title}</h3>
                     </div>
-                </div>
+                  </div>
+                </Link>
+              ))}
             </div>
-            <Footer />
+          )}
+        </div>
+      </div>
     </div>
   );
 };
