@@ -40,10 +40,10 @@
 }
 
 .items {
-  display: grid;
+  /* display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
-  justify-items: center;
+  justify-items: center; */
   margin-inline: 20px;
 }
 
@@ -53,6 +53,7 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s, box-shadow 0.3s;
+  margin-top: 20px;
 
   @media screen and (max-width: 768px) {
     margin: 20px;

@@ -87,7 +87,7 @@ const DetailOrders = () => {
 
                 if(response.status === 200){
                     const data = await response.json();
-                    setOrders(data[0]);
+                    setOrders(data);
                 }
             } 
             catch (error) {
@@ -162,7 +162,7 @@ const DetailOrders = () => {
         }
     };
 
-    if(!carts){
+    if(!orders){
         return <div>Antara tidak ada atau loading</div>
     }
     

@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import styles from './Orders.module.css';
 import Navbar from "../Navbar/Navbar";
 import PriceComponent from "../PriceComponent/PriceComponent";
+import Footer from "../Footer/Footer";
 
 const Orders = () => {
 
@@ -86,7 +87,7 @@ const Orders = () => {
                     ))
                     }
                 </div>
-                {/* <Footer /> */}
+                <Footer />
             </>
         )}        
         </>

@@ -25,7 +25,7 @@
   
   .image {
     width: 100%;
-    height: auto;
+    height: 700px;
     object-fit: contain; /* Ensure the image fits within the wrapper without distortion */
   }
   

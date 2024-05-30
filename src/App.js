@@ -9,7 +9,6 @@ import Carts from './components/Carts/Carts';
 import DetailOrders from './components/DetailOrders/DetailOrders';
 import Orders from './components/Orders/Orders';
 import Products from './components/Products/Products';
-import Footer from './components/Footer/Footer';
 
 function App() {
   return (
@@ -26,7 +25,6 @@ function App() {
         <Route path="/orders" Component={Orders} />
         <Route path="/orders/:orderId" element={<DetailOrders />} />
       </Routes>
-      <Footer />
     </Router>
   );
 }

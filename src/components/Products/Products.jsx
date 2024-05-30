@@ -4,6 +4,7 @@ import styles from "./Products.module.css";
 import Navbar from "../Navbar/Navbar";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Pagination } from '@mantine/core';
+import Footer from '../Footer/Footer';
 
 function chunk(array, size) {
     if (!array.length) {
@@ -147,6 +148,7 @@ const Products = () => {
                     />
                 </div>   
             </div>
+            <Footer />
         </>
     );
 };

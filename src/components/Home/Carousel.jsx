@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Carousel as MantineCarousel } from '@mantine/carousel';
 import styles from "./Carousel.module.css";
 
-const Carousel = () => {
+const CarouselHero = () => {
   return (
     <MantineCarousel withIndicators height={760} className={styles.carousel} loop>
       <MantineCarousel.Slide>
@@ -22,32 +22,34 @@ const Carousel = () => {
         </Link>
       </MantineCarousel.Slide>
 
+      {/*  */}
       <MantineCarousel.Slide>
         <Link to="" className={styles.slide}>
           <div className={styles.imageWrapper}>
             <img
-              src="https://c.animaapp.com/Yz41YjBx/img/image-2.png"
+              src="/images/model2.jpeg"
               alt="Slide 2"
               className={styles.image}
             />
           </div>
           <div className={styles.caption}>
-            <h2>Erika coach Jacket <br /> Wander Lust black</h2>
+            <h2>Gucci Cotton Canvas & <br /> GG Supreme Jacket <br /> Dark Grey</h2>
           </div>
         </Link>
       </MantineCarousel.Slide>
 
+      {/* hodiee */}
       <MantineCarousel.Slide>
         <Link to="" className={styles.slide}>
           <div className={styles.imageWrapper}>
             <img
-              src="https://c.animaapp.com/Yz41YjBx/img/image-2.png"
+              src="/images/model3.jpg"
               alt="Slide 3"
               className={styles.image}
             />
           </div>
           <div className={styles.caption}>
-            <h2>Erifa coach Jacket <br /> Wander Lust brown</h2>
+            <h2>Comfy Cotton Hoodie <br /> Midnight White</h2>
           </div>
         </Link>
       </MantineCarousel.Slide>
@@ -55,4 +57,4 @@ const Carousel = () => {
   );
 };
 
-export default Carousel;
+export default CarouselHero;
