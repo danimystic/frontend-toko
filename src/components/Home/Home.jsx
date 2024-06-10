@@ -45,7 +45,7 @@ const Home = () => {
           ) : (
             <div className={styles.items}>
               {categories.map((category) => (
-                <Link>
+                <Link to={"/products?gender=All&category="+category.title}>
                   <div className={styles.item} key={category.id}>
                     <img className={styles.image} alt={category.title} src={category.img} />
                     <div className={styles.card}>
