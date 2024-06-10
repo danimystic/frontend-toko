@@ -53,7 +53,7 @@ const Home = () => {
               >
                 {categories.map((category) => (
                   <MantineCarousel.Slide key={category.id}>
-                    <Link to="#">
+                    <Link to={"/products?gender=All&category="+category.title}>
                       <div className={styles.item}>
                         <img className={styles.image} alt={category.title} src={category.img} />
                         <div className={styles.card}>
