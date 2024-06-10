@@ -67,12 +67,12 @@ const Orders = () => {
             <>
                 <Navbar />
                 <h1 style={{marginTop: "100px", marginLeft: "100px"}}>Orders</h1>
-                <div style={{padding: "100px", paddingTop: "0px"}} className={styles.listOrder}>
+                <div className={styles.listOrder}>
                     {orders.map((item) => (
                         <Link to={`/orders/${item.orderId}`} className={styles.linkContainer}>
                             <div className={styles.orderDetail}>
                                 <div className={styles.top}>
-                                    <h3 style={{margin: "0px"}}>{item.recipientName}</h3>
+                                    <h3 style={{margin: "0px"}}>{item.recipientName}</h3> 
                                     <h4 className={styles.price}><PriceComponent price={item.total} /></h4>
                                 </div>
                                 <div className={styles.center}>
@@ -84,9 +84,9 @@ const Orders = () => {
                                 </div>
                             </div>
                         </Link>
-                    ))
+                    )) 
                     }
-                </div>
+                </div> 
                 <Footer />
             </>
         )}        

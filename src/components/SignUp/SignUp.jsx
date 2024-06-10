@@ -1,16 +1,29 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
-import styles from './SignUp.module.css'; 
+import styles from './SignUp.module.css';
+import {
+    TextInput,
+    PasswordInput,
+    Paper,
+    Title,
+    Text,
+    Container,
+    Group,
+    Button,
+    Anchor
+} from '@mantine/core';
+import { Link } from 'react-router-dom';
 
 const SignUp = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSignup = async () => {
+    const handleSignup = async (e) => {
+        e.preventDefault();
         try {
-            const response = await fetch(process.env.REACT_APP_BACKEND_URL+'/signup', {
+            const response = await fetch(process.env.REACT_APP_BACKEND_URL + '/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -47,38 +60,55 @@ const SignUp = () => {
 
     return (
         <div className={styles["signup-container"]}>
-            <div className={styles["signup-box"]}>
-                <h2>Sign Up</h2>
-                <form>
-                    <div className={styles["form-group"]}>
-                        <label>Username:</label>
-                        <input
-                            type="text"
+            <Container size={420} my={40}>
+                <Title ta="center" className={styles.title}>
+                    Create an Account
+                </Title>
+                <Text c="dimmed" size="sm" ta="center" mt={5}>
+                    Already have an account?{' '}
+                    <Link to="/login">
+                        <Anchor size="sm" component="a" style={{ color: '#a1c5f8' }}>
+                            Sign in
+                        </Anchor>
+                    </Link>
+                </Text>
+
+                <Paper withBorder shadow="md" p={30} mt={30} radius="md">
+                    <form onSubmit={handleSignup} className={styles.form}>
+                        <TextInput
+                            label="Username"
+                            placeholder="Your username"
+                            inputMode='text'
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
+                            required
+                            autoComplete="username"
+                            autoFocus
                         />
-                    </div>
-                    <div className={styles["form-group"]}>
-                        <label>Email:</label>
-                        <input
-                            type="email"
+                        <TextInput
+                            label="Email"
+                            placeholder="Your email"
                             value={email}
+                            inputMode='email'
+                            autoComplete="email"
                             onChange={(e) => setEmail(e.target.value)}
+                            required
+                            mt="md"
                         />
-                    </div>
-                    <div className={styles["form-group"]}>
-                        <label>Password:</label>
-                        <input
-                            type="password"
+                        <PasswordInput
+                            label="Password"
+                            placeholder="Your password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            required
+                            mt="md"
                         />
-                    </div>
-                    <button type="button" onClick={handleSignup}>
-                        Sign Up
-                    </button>
-                </form>
-            </div>
+                        <Button type="submit" fullWidth mt="xl" color='#f22e52' className={styles.button}>
+                            Sign Up
+                        </Button>
+                    </form>
+                </Paper>
+            </Container>
         </div>
     );
 };

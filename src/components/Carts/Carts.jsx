@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from './Carts.module.css';
 import Navbar from "../Navbar/Navbar";
 import PriceComponent from "../PriceComponent/PriceComponent";
+import Footer from "../Footer/Footer";
 
 const Carts = () => {
 
@@ -228,7 +229,7 @@ const Carts = () => {
                                 {carts.length === 0 ? (
                                     <div className={styles.cartsEmpty}>
                                         <p>Your shopping cart is empty</p>
-                                        <button className={styles.shop} onClick={() => window.location.href = '/home'}>
+                                        <button className={styles.shop} onClick={() => window.location.href = '/products'}>
                                             Shop Now </button>
                                     </div>
                                 ) : (
@@ -292,7 +293,6 @@ const Carts = () => {
                             </div>
                         )}
                     </div>
-                    {/* <Footer /> */}
 
                     {showOrderForm && (
                         <div className={styles.orderFormOverlay}>
@@ -314,6 +314,7 @@ const Carts = () => {
                             </div>
                         </div>
                     )}
+                    <Footer />
                 </>
             )}
         </>

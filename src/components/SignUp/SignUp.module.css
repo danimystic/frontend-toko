@@ -1,64 +1,36 @@
-/* signup.css */
-
+/* Login.module.css */
 .signup-container {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     height: 100vh;
-    color: #000;
 }
 
-.signup-box {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 40px;
-    width: 400px;
-    text-align: center;
-}
-
-h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    font-size: 14px;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-input {
+.form {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
+    color: #6b7280;
 }
 
-button {
-    background-color: #e8491d;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
+.title {
+    font-family:
+        Greycliff CF,
+        var(--mantine-font-family);
+    font-weight: 900;
+    font-size: 36px;
 }
 
-button:hover {
-    background-color: #333;
+.text {
+    margin-top: 5px;
+    color: #6b7280;
 }
 
-/* Responsive Styles */
-@media (max-width: 600px) {
-    .signup-box {
-        width: 100%;
-    }
+.paper {
+    min-width: 300px;
+    padding: 30px;
+    margin-top: 30px;
+}
+
+.button {
+    width: 100%;
+    margin-top: 20px;
 }

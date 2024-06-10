@@ -2,6 +2,19 @@ import React from 'react';
 import styles from './Login.module.css';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
+import {
+    TextInput,
+    PasswordInput,
+    Checkbox,
+    Anchor,
+    Paper,
+    Title,
+    Text,
+    Container,
+    Group,
+    Button,
+} from '@mantine/core';
+import classes from './Login.module.css';
 
 class Login extends React.Component {
     handleLogin = async (e) => {
@@ -11,7 +24,7 @@ class Login extends React.Component {
         const password = e.target.elements.password.value;
 
         try {
-            const response = await fetch(process.env.REACT_APP_BACKEND_URL+'/login', {
+            const response = await fetch(process.env.REACT_APP_BACKEND_URL + '/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -22,10 +35,9 @@ class Login extends React.Component {
 
             const data = await response.json();
 
-            if(data.success) {
+            if (data.success) {
                 window.location.href = data.redirectTo;
-            } 
-            else{
+            } else {
                 Swal.fire({
                     icon: 'error',
                     title: 'Login Gagal',
@@ -36,31 +48,48 @@ class Login extends React.Component {
             console.error('Error:', error);
         }
     };
-    
+
     render() {
         return (
             <div className={styles["login-container"]}>
-                <div className={styles['login-box']}>
-                    <h1 className={styles['logo']}>Dann's Jacket World</h1>
-                    <h3>Login</h3>
-                    <form onSubmit={this.handleLogin}>
-                        <div className={styles["form-group"]}>
-                            <label htmlFor="email">Email:</label>
-                            <input type="text" id="email" name="email" required />
-                        </div>
-                        <div className={styles["form-group"]}>
-                            <label htmlFor="password">Password:</label>
-                            <input type="password" id="password" name="password" required />
-                        </div>
-                        <div className={styles["button-group"]}>
-                            <button type="submit" className={styles["login-button"]}>Login</button>
-                            <Link to='/signup' type="button" className={styles["signup-button"]}>Sign Up</Link>
-                        </div>
-                    </form>
-                </div>
+                <Container size={420} my={40}>
+                    <Title ta="center" className={classes.title}>
+                        Dann's Jacket World
+                    </Title>
+                    <Text c="dimmed" size="sm" ta="center" mt={5}>
+                        Do not have an account yet?{' '}
+                        <Link to="/signup">
+                            <Anchor size="sm" component="a" style={{ color: '#a1c5f8' }}>
+                                Create account
+                            </Anchor>
+                        </Link>
+                    </Text>
+
+                    <Paper withBorder shadow="md" p={30} mt={30} radius="md" className={classes.paper}>
+                        <form onSubmit={this.handleLogin} className={classes.form}>
+                            <TextInput
+                                label="Email"
+                                placeholder="Your email"
+                                name="email"
+                                required
+                                autoFocus
+                            />
+                            <PasswordInput
+                                label="Password"
+                                placeholder="Your password"
+                                name="password"
+                                required
+                                mt="md"
+                            />
+                            <Button type="submit" fullWidth mt="xl" color='#f22e52' className={classes.button}>
+                                Sign in
+                            </Button>
+                        </form>
+                    </Paper>
+                </Container>
             </div>
         );
     }
 }
- 
+
 export default Login;
