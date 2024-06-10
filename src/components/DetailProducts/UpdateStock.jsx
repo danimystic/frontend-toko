@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styles from './UpdateStock.module.css';
+import { LoadingOverlay } from '@mantine/core';
 
 const UpdateStock = ({ productId, onModifiedStatus }) => {
     const [sizes, setSizes] = useState({});
     const [originalSizes, setOriginalSizes] = useState({});
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchStock = async () => {
@@ -37,6 +39,7 @@ const UpdateStock = ({ productId, onModifiedStatus }) => {
     };
 
     const handleUpdate = async () => {
+        setLoading(true);
         try {
             const response = await fetch(process.env.REACT_APP_BACKEND_URL + `/products/stock/${productId}`, {
                 method: 'PUT',
@@ -58,11 +61,19 @@ const UpdateStock = ({ productId, onModifiedStatus }) => {
         }
         catch (error) {
             console.error(error);
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
         <div className={styles.updateStock}>
+            <LoadingOverlay
+                visible={loading}
+                zIndex={1000}
+                overlayProps={{ radius: 'sm', blur: 2, color: 'rgba(0, 0, 0, .5)' }}
+                loaderProps={{ color: '#f22e52', type: 'bars', }}
+            />
             <h2 style={{ marginBottom: "5px", marginTop: "0px" }}>Update Stock</h2>
             <div className={styles.itemUpdateStock}>
                 {Object.entries(sizes).map(([size, stock]) => (

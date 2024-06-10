@@ -3,7 +3,7 @@ import ProductList from "./ProductList";
 import styles from "./Products.module.css";
 import Navbar from "../Navbar/Navbar";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Pagination } from '@mantine/core';
+import { Pagination, Skeleton } from '@mantine/core';
 import Footer from '../Footer/Footer';
 
 function chunk(array, size) {
@@ -22,7 +22,7 @@ const Products = () => {
     const [selectedGender, setSelectedGender] = useState('All');
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [currentPage, setCurrentPage] = useState(1); // State for current page
-    const [productsPerPage] = useState(4); // State for products per page, set to 6
+    const [productsPerPage] = useState(6); // State for products per page, set to 6
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -126,7 +126,9 @@ const Products = () => {
                 <div className={styles.listProduct}>
                     {loading ? (
                         <div className={styles.loading}>
-                            <p>Loading...</p>
+                            {[...Array(productsPerPage)].map((_, index) => (
+                                <Skeleton key={index} height={400} width={250} mb="sm" />
+                            ))}
                         </div>
                     ) : (
                         currentProducts.length === 0 ? (
@@ -146,7 +148,7 @@ const Products = () => {
                         mt="sm"
                         color="#f22e52"
                     />
-                </div>   
+                </div>
             </div>
             <Footer />
         </>

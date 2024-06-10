@@ -7,8 +7,10 @@
 
 .sizes button{
     width: 70px;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
     background-color: transparent;
-    border: 1px solid #fff;
 }
 
 .sizes button:hover{
@@ -34,17 +36,23 @@
     width: 100%;
     min-width: fit-content;
     background-color: #f22e52;
-    border: 1px solid #fff;
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
     margin: 10px 0px;
 }
 
 .cart:hover{
-    background-color: #ff9bad;
+    background-color: #fff;
     color: #000;
 }
 
 .cart:disabled{
     background-color: #808080;
     cursor: not-allowed;
+    padding: 10px;
+    border-radius: 5px;
     color: #fff;
 }

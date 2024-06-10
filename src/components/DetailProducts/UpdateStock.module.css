@@ -18,18 +18,24 @@
 
 .inputStock{
     max-width: 100px;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 .submitUpdate{
-    align-self: self-end;
-    max-width: 160px;
-    justify-content: center;
+    width: 100%;
     background-color: #f22e52;
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0px;
 }
 
 .submitUpdate:disabled{
-    align-self: self-end;
-    max-width: 160px;
+    width: 100%;
     justify-content: center;
     background-color: #808080;
     color: #fff;

@@ -3,10 +3,11 @@ import styles from './Carts.module.css';
 import Navbar from "../Navbar/Navbar";
 import PriceComponent from "../PriceComponent/PriceComponent";
 import Footer from "../Footer/Footer";
+import { Modal, Button, TextInput, LoadingOverlay, Box } from '@mantine/core';
 
 const Carts = () => {
-
     const [isClient, setIsClient] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchSessionInfo = async () => {
@@ -23,17 +24,16 @@ const Carts = () => {
                     const data = await response.json();
                     if (data.role === "client") {
                         setIsClient(true);
-                    }
-                    else {
+                    } else {
                         setIsClient(false);
                     }
-                }
-                else {
+                } else {
                     setIsClient(false);
                 }
-            }
-            catch (error) {
+            } catch (error) {
                 console.error(error);
+            } finally {
+                setLoading(false);
             }
         };
         fetchSessionInfo();
@@ -43,6 +43,7 @@ const Carts = () => {
 
     useEffect(() => {
         const fetchCarts = async () => {
+            setLoading(true);
             try {
                 const response = await fetch(process.env.REACT_APP_BACKEND_URL + '/carts', {
                     method: 'GET',
@@ -56,9 +57,10 @@ const Carts = () => {
                     const data = await response.json();
                     setCarts(data);
                 }
-            }
-            catch (error) {
+            } catch (error) {
                 console.error(error);
+            } finally {
+                setLoading(false);
             }
         };
         fetchCarts();
@@ -68,7 +70,6 @@ const Carts = () => {
 
     const updateQuantity = async (cartId, quantity, index) => {
         try {
-
             setIsUpdatingQuantity(true);
 
             const newCarts = [...carts];
@@ -94,17 +95,14 @@ const Carts = () => {
             if (response.status === 200) {
                 setIsUpdatingQuantity(false);
             }
-        }
-        catch (error) {
+        } catch (error) {
             console.error(error);
             setIsUpdatingQuantity(false);
         }
-
     };
 
     const deleteCart = async (cartId) => {
         try {
-
             const newCarts = carts.filter((cart) => cart.cartId !== cartId);
             setCarts(newCarts);
             let total = 0;
@@ -122,20 +120,16 @@ const Carts = () => {
                 },
                 credentials: 'include',
             });
-
-            // if (response.status === 200) {
-                
-            // }
-        }
-        catch (error) {
+        } catch (error) {
             console.error(error);
         }
-    }
+    };
 
     const [orders, setOrders] = useState({});
 
     useEffect(() => {
         const fetchOrder = async () => {
+            setLoading(true);
             try {
                 const response = await fetch(process.env.REACT_APP_BACKEND_URL + '/orders', {
                     method: 'GET',
@@ -149,9 +143,10 @@ const Carts = () => {
                     const data = await response.json();
                     setOrders(data);
                 }
-            }
-            catch (error) {
+            } catch (error) {
                 console.error(error);
+            } finally {
+                setLoading(false);
             }
         };
         fetchOrder();
@@ -162,7 +157,6 @@ const Carts = () => {
     const toggleOrderForm = () => {
         setShowOrderForm(!showOrderForm);
     };
-
 
     const createOrder = async () => {
         try {
@@ -204,10 +198,6 @@ const Carts = () => {
 
     const isOrderButtonDisabled = !recipientName || !address;
 
-    if (!carts) {
-        setCarts([]);
-    }
-
     const handleKeyDown = (event) => {
         const charCode = event.keyCode;
         if (charCode < 48 || charCode > 57) {
@@ -222,95 +212,101 @@ const Carts = () => {
             {isClient && (
                 <>
                     <Navbar />
-                    <div className={styles.cartsAndOrder}>
-                        <div className={styles.left}>
-                            <h2 >Carts</h2>
-                            <div className={styles.cartList}>
-                                {carts.length === 0 ? (
-                                    <div className={styles.cartsEmpty}>
-                                        <p>Your shopping cart is empty</p>
-                                        <button className={styles.shop} onClick={() => window.location.href = '/products'}>
-                                            Shop Now </button>
-                                    </div>
-                                ) : (
+                    <Box pos="relative" className={styles.cartsAndOrder}>
+
+                        <LoadingOverlay
+                            visible={loading}
+                            zIndex={1000}
+                            overlayProps={{ radius: 'sm', blur: 2, color: 'rgba(0, 0, 0, .5)' }}
+                            loaderProps={{ color: '#f22e52', type: 'bars', }}
+                        />
+                        {!loading && (
+                            <>
+                                <div className={styles.left}>
+                                    <h2 className={styles.title}>Carts</h2>
                                     <div className={styles.cartList}>
-                                        {carts.map((item, index) => (
-                                            <div key={index} className={styles.cartDetails}>
-                                                <div className={styles.Cart}>
-                                                    <div className={styles.leftCart}>
-                                                        <img src={item.imageUrl} alt={item.name} />
-                                                        <div className={styles.centerCenterCart}>
-                                                            <h4 className={styles.productName}>{item.name}</h4>
-                                                            <p style={{ marginTop: "0", marginBottom: "0" }}>{item.gender}'s {item.category}</p>
-                                                            <div style={{ fontSize: "13px" }}>Size: {item.size}</div>
-                                                            {isUpdatingQuantity === true ? 
-                                                                (
-                                                                    <input className={styles.inputQuantity}
-                                                                        type="text"
-                                                                        value={item.quantity}
-                                                                        disabled="true"
-                                                                    />
-                                                                )
-                                                                :
-                                                                (
-                                                                    <input className={styles.inputQuantity}
-                                                                        type="number"
-                                                                        min="1"
-                                                                        value={item.quantity}
-                                                                        onChange={(e) => updateQuantity(item.cartId, e.target.value, index)}
-                                                                        onKeyDown={handleKeyDown}
-                                                                    />
-                                                                )
-                                                            }
-
-                                                        </div>
-                                                    </div>
-                                                    <div className={styles.rightCart}>
-                                                        <div className={styles.itemRightCart}>
-                                                            Price: <PriceComponent price={item.price * item.quantity} />
-                                                            <button className={styles.removeCart} onClick={() => deleteCart(item.cartId)}>
-                                                                Delete
-                                                            </button>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
+                                        {carts.length === 0 ? (
+                                            <div className={styles.cartsEmpty}>
+                                                <p>Your shopping cart is empty</p>
+                                                <button className={styles.shop} onClick={() => window.location.href = '/products'}>
+                                                    Shop Now </button>
                                             </div>
-                                        ))}
+                                        ) : (
+                                            <div className={styles.cartList}>
+                                                {carts.map((item, index) => (
+                                                    <div key={index} className={styles.cartDetails}>
+                                                        <div className={styles.Cart}>
+                                                            <div className={styles.leftCart}>
+                                                                <img src={item.imageUrl} alt={item.name} />
+                                                                <div className={styles.centerCenterCart}>
+                                                                    <h4 className={styles.productName}>{item.name}</h4>
+                                                                    <p style={{ marginTop: "0", marginBottom: "0" }}>{item.gender}'s {item.category}</p>
+                                                                    <div style={{ fontSize: "13px" }}>Size: {item.size}</div>
+                                                                    {isUpdatingQuantity === true ? (
+                                                                        <input className={styles.inputQuantity}
+                                                                            type="text"
+                                                                            value={item.quantity}
+                                                                            disabled="true"
+                                                                        />
+                                                                    ) : (
+                                                                        <input className={styles.inputQuantity}
+                                                                            type="number"
+                                                                            min="1"
+                                                                            value={item.quantity}
+                                                                            onChange={(e) => updateQuantity(item.cartId, e.target.value, index)}
+                                                                            onKeyDown={handleKeyDown}
+                                                                        />
+                                                                    )}
+                                                                </div>
+                                                            </div>
+                                                            <div className={styles.rightCart}>
+                                                                <div className={styles.itemRightCart}>
+                                                                    Price: <PriceComponent price={item.price * item.quantity} />
+                                                                    <button className={styles.removeCart} onClick={() => deleteCart(item.cartId)}>
+                                                                        Delete
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                                {carts.length !== 0 && (
+                                    <div className={styles.summary}>
+                                        <div className={styles.title}>
+                                            <p>Summary :</p>
+                                        </div>
+                                        <div className={styles.price}><PriceComponent price={orders ? orders.total : 0} /></div>
+                                        <button className={styles.order} onClick={toggleOrderForm}>
+                                            Order
+                                        </button>
                                     </div>
                                 )}
-                            </div>
-                        </div>
-                        {carts.length === 0 ? ('') : (
-                            <div className={styles.summary}>
-                                <div className={styles.title}>
-                                    <p>Summary :</p>
-                                </div>
-                                <div className={styles.price}><PriceComponent price={orders ? orders.total : 0} /></div>
-                                <button className={styles.order} onClick={toggleOrderForm}>
-                                    Order
-                                </button>
-                            </div>
+                            </>
                         )}
-                    </div>
-
+                    </Box>
                     {showOrderForm && (
                         <div className={styles.orderFormOverlay}>
                             <div className={styles.orderForm}>
                                 <h2 style={{ marginTop: "0" }}>Order Form</h2>
                                 <label className={styles.labels} htmlFor="recipientName">Recipient Name:</label>
-                                <input style={{ width: "75%" }} type="text" id="recipientName" name="recipientName" onChange={handleRecipientNameChange} />
+                                <input className={styles.inputModal} type="text" id="recipientName" name="recipientName" onChange={handleRecipientNameChange} />
 
                                 <label className={styles.labels} htmlFor="address">Address:</label>
-                                <textarea style={{ width: "75%" }} id="address" name="address" onChange={handleAddressChange}></textarea>
+                                <textarea className={styles.inputModal} id="address" name="address" onChange={handleAddressChange}></textarea>
 
-                                <button className={styles.createOrder} onClick={createOrder} disabled={isOrderButtonDisabled}>
-                                    Create Order
-                                </button>
+                                <div className={styles.buttonContainer}>
+                                    <button className={styles.createOrder} onClick={createOrder} disabled={isOrderButtonDisabled}>
+                                        Create Order
+                                    </button>
 
-                                <button className={styles.cancelOrder} onClick={toggleOrderForm}>
-                                    Cancel
-                                </button>
+                                    <button className={styles.cancelOrder} onClick={toggleOrderForm}>
+                                        Cancel
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     )}
@@ -319,7 +315,6 @@ const Carts = () => {
             )}
         </>
     );
-
 };
 
 export default Carts;

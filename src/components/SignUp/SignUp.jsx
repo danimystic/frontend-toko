@@ -9,7 +9,6 @@ import {
     Title,
     Text,
     Container,
-    Group,
     Button,
     Anchor
 } from '@mantine/core';
