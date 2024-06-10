@@ -10,7 +10,6 @@
     border: none;
     padding: 5px;
     border-radius: 5px;
-    background-color: transparent;
 }
 
 .sizes button:hover{
@@ -24,8 +23,8 @@
     color: #fff;
 }
 .sizes button.activeSize {
-    background-color: #fff; /* Warna latar belakang saat tombol aktif */
-    color: #000; /* Warna teks saat tombol aktif */
+    background-color: #f22e52; /* Warna latar belakang saat tombol aktif */
+    color: #fff; /* Warna teks saat tombol aktif */
 }
 
 .displayStock{
